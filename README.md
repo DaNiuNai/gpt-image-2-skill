@@ -1,5 +1,11 @@
 # gpt-image-2-skill
 
+## 安装
+
+```bash
+npx skills add https://github.com/DaNiuNai/gpt-image-2-skill --skill gpt-image-2
+```
+
 ## 脚本是如何运作的？
 
 `scripts/gen.js` 本质上是一个很薄的 Codex CLI 封装，而不是直接调用 OpenAI 图片 API。它会解析 `--prompt`、`--out`、可重复的 `--ref`、`--timeout-sec` 和 `--force` 参数，检查本机是否存在 `codex` 命令，然后运行类似下面的命令：
