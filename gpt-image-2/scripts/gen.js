@@ -334,10 +334,6 @@ async function findBestImageBlob(sessionPaths) {
   return best;
 }
 
-function quoteCmdArg(value) {
-  return `"${String(value).replace(/"/g, '\\"')}"`;
-}
-
 function runCodex(codexArgs, instruction, timeoutSec) {
   return new Promise((resolve) => {
     const command = findCommand("codex");
@@ -348,12 +344,7 @@ function runCodex(codexArgs, instruction, timeoutSec) {
       child = isWindowsScript
         ? spawn(
             process.env.ComSpec || "cmd.exe",
-            [
-              "/d",
-              "/s",
-              "/c",
-              `${quoteCmdArg(command)} ${codexArgs.map(quoteCmdArg).join(" ")}`,
-            ],
+            ["/d", "/c", "call", command, ...codexArgs],
             {
               stdio: ["pipe", "pipe", "pipe"],
               windowsHide: true,
