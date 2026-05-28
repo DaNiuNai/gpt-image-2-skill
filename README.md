@@ -6,6 +6,28 @@
 npx skills add https://github.com/DaNiuNai/gpt-image-2-skill --skill gpt-image-2
 ```
 
+安装完成后，请确保本机已安装并登录 Codex CLI：
+
+1. 检查 `codex` 命令是否可用：
+
+   ```bash
+   codex --version
+   ```
+
+   如果提示找不到命令，请先安装：
+
+   ```bash
+   npm install -g @openai/codex
+   ```
+
+2. 确认已登录有 Plus 或 Pro 订阅的 OpenAI 账号：
+
+   ```bash
+   codex login status
+   ```
+
+   如果未登录，请执行 `codex login` 完成登录。Codex 的图像生成功能需要 Plus 或 Pro 订阅才能使用。
+
 ## 脚本是如何运作的？
 
 `scripts/gen.js` 本质上是一个很薄的 Codex CLI 封装，而不是直接调用 OpenAI 图片 API。它会解析 `--prompt`、`--out`、可重复的 `--ref`、`--timeout-sec` 和 `--force` 参数，检查本机是否存在 `codex` 命令，然后运行类似下面的命令：
