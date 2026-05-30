@@ -114,3 +114,30 @@ codex-cli 0.111.0+ 中有两个容易被其他封装写错的非显然参数：
 
 它不是直接的 OpenAI API 客户端。它不会授予新能力，而是依赖用户可用的 Codex CLI 登录状态。它也不是多租户服务（每次调用只处理一次请求；并发调用依赖文件系统快照差异来区分）。
 
+## 作为 JS 库调用
+
+如果需要在其他 Node.js 脚本中直接复用生成逻辑，可以引入 `scripts/image-gen.js`：
+
+```js
+const { generateImage } = require("./scripts/image-gen");
+
+async function main() {
+  const outputPath = await generateImage({
+    prompt: "Use the reference image to create a full-body standard A-pose character turnaround sheet with three views: front view, side view, and back view.",
+    refs: ["./a.png"],
+    out: "./apose.png",
+    timeoutSec: 300,
+    force: true,
+  });
+
+  console.log(outputPath);
+}
+
+main().catch((err) => {
+  console.error(err.message);
+  process.exit(err.exitCode || 1);
+});
+```
+
+`generateImage()` 返回最终写入的图片路径；当生成格式和 `out` 扩展名不一致时，库会自动把输出路径调整为匹配的 `.png`、`.jpg` 或 `.webp`。
+
