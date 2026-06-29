@@ -5,7 +5,7 @@
 ### 安装
 
 ```bash
-npx skills add https://github.com/DaNiuNai/gpt-image-2-skill --skill gpt-image-2
+npx skills add https://github.com/DaNiuNai/skills --skill gpt-image-2
 ```
 
 安装完成后，请确保本机已安装并登录 Codex CLI：
